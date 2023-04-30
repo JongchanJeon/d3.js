@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>My App</title>
+</head>
+<body>
+<h1>Hello, World!</h1>
+
+</body>
+<script>
+    data = await FileAttachment("electoral_college.csv").csv({ typed: true })
+    contested = data
+        .filter(d => d.category === "none")
+        .sort((a, b) => d3.descending(a.votes, b.votes))
+    totalD = d3.sum(data.filter(d => d.category === "D").map(d => d.votes))
+    totalR = d3.sum(data.filter(d => d.category === "R").map(d => d.votes))
+    decided = new Map(
+        Object.entries(selectStates).filter(([key, value]) => value !== "none")
+    )
+    treeData = {
+        const root = {
+            name: "",
+            votes: 0,
+            votesD: totalD,
+            votesR: totalR,
+            pruned: false
+        };
+        function buildTree(node, depth) {
+        if (depth < contested.length && !winner(node)) {
+            const state = contested[depth];
+            node.children = [
+                {
+                    name: state.name,
+                    shortname: state.shortname,
+                    party: "D",
+                    votes: state.votes,
+                    votesD: node.votesD + state.votes,
+                    votesR: node.votesR,
+                    pruned:
+                        node.pruned ||
+                        (decided.has(state.name) && decided.get(state.name) === "R")
+                },
+                {
+                    name: state.name,
+                    shortname: state.shortname,
+                    party: "R",
+                    votes: state.votes,
+                    votesD: node.votesD,
+                    votesR: node.votesR + state.votes,
+                    pruned:
+                        node.pruned ||
+                        (decided.has(state.name) && decided.get(state.name) === "D")
+                }
+            ];
+            node.children.forEach(child => buildTree(child, depth + 1));
+        }
+        return node;
+    }
+    return buildTree(root, 0);
+    }
+    function autoBox() {
+        document.body.appendChild(this);
+        const { x, y, width, height } = this.getBBox();
+        document.body.removeChild(this);
+        return [x - 5, y, width + 10, height];
+    }
+</script>
+</html>
