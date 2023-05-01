@@ -1,70 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<script src="https://d3js.org/d3.v7.min.js"></script>
 <head>
+    <script src = "http://d3js.org/d3.v3.js"></script>
     <meta charset="UTF-8">
     <title>My App</title>
 </head>
 <body>
-<h1>Hello, World!</h1>
+<h1>D3 테스트</h1>
 
-</body>
+<svg th:width="500" th:height="500"></svg>
+
 <script>
-    data = await FileAttachment("electoral_college.csv").csv({ typed: true })
-    contested = data
-        .filter(d => d.category === "none")
-        .sort((a, b) => d3.descending(a.votes, b.votes))
-    totalD = d3.sum(data.filter(d => d.category === "D").map(d => d.votes))
-    totalR = d3.sum(data.filter(d => d.category === "R").map(d => d.votes))
-    decided = new Map(
-        Object.entries(selectStates).filter(([key, value]) => value !== "none")
-    )
-    treeData = {
-        const root = {
-            name: "",
-            votes: 0,
-            votesD: totalD,
-            votesR: totalR,
-            pruned: false
-        };
-        function buildTree(node, depth) {
-        if (depth < contested.length && !winner(node)) {
-            const state = contested[depth];
-            node.children = [
-                {
-                    name: state.name,
-                    shortname: state.shortname,
-                    party: "D",
-                    votes: state.votes,
-                    votesD: node.votesD + state.votes,
-                    votesR: node.votesR,
-                    pruned:
-                        node.pruned ||
-                        (decided.has(state.name) && decided.get(state.name) === "R")
-                },
-                {
-                    name: state.name,
-                    shortname: state.shortname,
-                    party: "R",
-                    votes: state.votes,
-                    votesD: node.votesD,
-                    votesR: node.votesR + state.votes,
-                    pruned:
-                        node.pruned ||
-                        (decided.has(state.name) && decided.get(state.name) === "D")
-                }
-            ];
-            node.children.forEach(child => buildTree(child, depth + 1));
-        }
-        return node;
-    }
-    return buildTree(root, 0);
-    }
-    function autoBox() {
-        document.body.appendChild(this);
-        const { x, y, width, height } = this.getBBox();
-        document.body.removeChild(this);
-        return [x - 5, y, width + 10, height];
-    }
+    const dataFile = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
+    const color = ['skyblue', 'blue', 'lime', 'red', 'yellowgreen'
+    , 'violet', 'blueviolet', 'chocolate', 'darkgreen', ' yellow']
+    const svg = d3.select('svg');
+
+    svg.selectAll('bar')
+        .data(dataFile)
+        .enter().append('rect')
+        .attr('fill', (d, i) => {return color[i]})
+        .attr('height', (d, i) => {return d })
+        .attr('width', 40)
+        .attr('x', (d, i) => {return 50 * i })
+        .attr('y', (d, i) => {return 100 - dataFile[i]})
 </script>
+</body>
+
 </html>

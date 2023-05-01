@@ -1,0 +1,57 @@
+name,shortname,abbreviation,votes,category
+Alabama,Ala.,AL,9,R
+Alaska,Alaska,AK,3,R
+Arizona,Ariz.,AZ,11,none
+Arkansas,Ark.,AR,6,R
+California,Calif.,CA,55,D
+Colorado,Colo.,CO,9,D
+Connecticut,Conn.,CT,7,D
+Delaware,Del.,DE,3,D
+District of Columbia,D.C.,DC,3,D
+Florida,Fla.,FL,29,none
+Georgia,Ga.,GA,16,none
+Hawaii,Hawaii,HI,4,D
+Idaho,Idaho,ID,4,R
+Illinois,Ill.,IL,20,D
+Indiana,Ind.,IN,11,R
+Iowa,Iowa,IA,6,none
+Kansas,Kan.,KS,6,R
+Kentucky,Ky.,KY,8,R
+Louisiana,La.,LA,8,R
+Maine,Maine,ME,2,D
+Maine-1,Maine-1,ME-1,1,D
+Maine-2,Maine-2,ME-2,1,none
+Maryland,Md.,MD,10,D
+Massachusetts,Mass.,MA,11,D
+Michigan,Mich.,MI,16,D
+Minnesota,Minn.,MN,10,D
+Mississippi,Miss.,MS,6,R
+Missouri,Mo.,MO,10,R
+Montana,Mont.,MT,3,R
+Nebraska,Neb.,NE,2,R
+Nebraska-1,Neb.-1,NE-1,1,R
+Nebraska-2,Neb.-2,NE-2,1,none
+Nebraska-3,Neb.-3,NE-3,1,R
+Nevada,Nev.,NV,6,none
+New Hampshire,N.H.,NH,4,none
+New Jersey,N.J.,NJ,14,D
+New Mexico,N.M.,NM,5,D
+New York,N.Y.,NY,29,D
+North Carolina,N.C.,NC,15,none
+North Dakota,N.D.,ND,3,R
+Ohio,Ohio,OH,18,none
+Oklahoma,Okla.,OK,7,R
+Oregon,Ore.,OR,7,D
+Pennsylvania,Pa.,PA,20,none
+Rhode Island,R.I.,RI,4,D
+South Carolina,S.C.,SC,9,R
+South Dakota,S.D.,SD,3,R
+Tennessee,Tenn.,TN,11,R
+Texas,Texas,TX,38,R
+Utah,Utah,UT,6,R
+Vermont,Vt.,VT,3,D
+Virginia,Va.,VA,13,D
+Washington,Wash.,WA,12,D
+West Virginia,W.Va.,WV,5,R
+Wisconsin,Wis.,WI,10,none
+Wyoming,Wyo.,WY,3,R

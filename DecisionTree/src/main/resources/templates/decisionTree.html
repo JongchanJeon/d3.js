@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <script src = "http://d3js.org/d3.v3.js"></script>
+  <script src="https://d3js.org/d3-fetch.v2.min.js"></script>
+  <meta charset="UTF-8">
+  <title>My App</title>
+</head>
+<body>
+<h1>D3 테스트</h1>
+
+<svg th:width="500" th:height="500"></svg>
+
+<script>
+
+    const data = FileAttachment("data.csv").csv({typed: true})
+    console.log(data);
+    contested = data
+            .filter(d => d.category === "none")
+            .sort((a, b) => d3.descending(a.votes, b.votes))
+    totalD = d3.sum(data.filter(d => d.category === "D").map(d => d.votes))
+    totalR = d3.sum(data.filter(d => d.category === "R").map(d => d.votes))
+    decided = new Map(
+            Object.entries(selectStates).filter(([key, value]) => value !== "none")
+    )
+    treeData = () => {
+      const root = {
+        name: "",
+        votes: 0,
+        votesD: totalD,
+        votesR: totalR,
+        pruned: false
+      };
+
+      function buildTree(node, depth) {
+        if (depth < contested.length && !winner(node)) {
+          const state = contested[depth];
+          node.children = [
+            {
+              name: state.name,
+              shortname: state.shortname,
+              party: "D",
+              votes: state.votes,
+              votesD: node.votesD + state.votes,
+              votesR: node.votesR,
+              pruned:
+                      node.pruned ||
+                      (decided.has(state.name) && decided.get(state.name) === "R")
+            },
+            {
+              name: state.name,
+              shortname: state.shortname,
+              party: "R",
+              votes: state.votes,
+              votesD: node.votesD,
+              votesR: node.votesR + state.votes,
+              pruned:
+                      node.pruned ||
+                      (decided.has(state.name) && decided.get(state.name) === "D")
+            }
+          ];
+          node.children.forEach(child => buildTree(child, depth + 1));
+        }
+        return node;
+      }
+
+      return buildTree(root, 0);
+    };
+
+    function autoBox() {
+      document.body.appendChild(this);
+      const {x, y, width, height} = this.getBBox();
+      document.body.removeChild(this);
+      return [x - 5, y, width + 10, height];
+    }
+
+    radius = 390
+
+    tree = d3
+            .cluster()
+            .size([2 * Math.PI, radius])
+            .separation((a, b) => (a.parent == b.parent ? 1 : 2) / a.depth)
+
+
+    targetWidth = Math.min(width, radius * 2)
+    circleSize = d3
+            .scaleSqrt()
+            .domain(d3.extent(contested.map(d => d.votes)))
+            .range([2.5, 6.5])
+    votesScale = d3
+            .scaleLinear()
+            .domain([0, 538])
+            .range([0, targetWidth])
+    result = d =>
+            d.votesD > 269
+                    ? "D"
+                    : d.votesR > 269
+                            ? "R"
+                            : d.votesD === 269 && d.votesR === 269
+                                    ? "tie"
+                                    : null
+    winner = d => {
+      const outcome = result(d);
+      return !outcome || outcome === "tie" ? null : outcome;
+    }
+    partyColor = d => (d.party === "D" ? colorD : d.party === "R" ? colorR : "#888")
+    colorD = "#2a72c9"
+    colorR = "#c92a2a"
+    prunedOpacity = 0.05
+    normalOpacity = 0.3
+    fullOpacity = 1.0
+    strokeOpacity = (pruned, highlight) =>
+            pruned ? prunedOpacity : highlight ? fullOpacity : normalOpacity
+    stateLabel = d => (width > 800 ? d.name : d.shortname)
+    candidateD = "Biden"
+    candidateR = "Trump"
+
+</script>
+</body>
+
+</html>

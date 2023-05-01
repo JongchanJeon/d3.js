@@ -26,5 +26,9 @@ public class UserController {
     public String getIndex() {
         return "index";
     }
+    @GetMapping("/test")
+    public String getTest() {
+        return "decisionTree";
+    }
 
 }
