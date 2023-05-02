@@ -30,5 +30,9 @@ public class UserController {
     public String getTest() {
         return "decisionTree";
     }
+    @GetMapping("/cindy")
+    public String getCindy() {
+        return "cindy";
+    }
 
 }

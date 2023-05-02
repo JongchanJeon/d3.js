@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <script src = "http://d3js.org/d3.v3.js"></script>
+  <meta charset="UTF-8">
+  <title>My App</title>
+</head>
+<body>
+<h1>D3 테스트</h1>
+
+<div id="observablehq-viewof-nodeDistance-93feb2da"></div>
+<div id="observablehq-viewof-chargeStr-93feb2da"></div>
+<div id="observablehq-viewof-xStr-93feb2da"></div>
+<div id="observablehq-viewof-yStr-93feb2da"></div>
+<div id="observablehq-Forcehart-93feb2da"></div>
+<div id="observablehq-viewof-order-93feb2da"></div>
+<div id="observablehq-data-93feb2da"></div>
+<p>Credit: <a href="https://observablehq.com/@cbuie/expose-of-graph-visualizations1">Exposé of the Graph by Chris L Buie</a></p>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
+<script type="module">
+  import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
+  import define from "https://api.observablehq.com/@cbuie/expose-of-graph-visualizations1.js?v=3";
+  new Runtime().module(define, name => {
+    if (name === "viewof nodeDistance") return new Inspector(document.querySelector("#observablehq-viewof-nodeDistance-93feb2da"));
+    if (name === "viewof chargeStr") return new Inspector(document.querySelector("#observablehq-viewof-chargeStr-93feb2da"));
+    if (name === "viewof xStr") return new Inspector(document.querySelector("#observablehq-viewof-xStr-93feb2da"));
+    if (name === "viewof yStr") return new Inspector(document.querySelector("#observablehq-viewof-yStr-93feb2da"));
+    if (name === "Forcehart") return new Inspector(document.querySelector("#observablehq-Forcehart-93feb2da"));
+    if (name === "viewof order") return new Inspector(document.querySelector("#observablehq-viewof-order-93feb2da"));
+    if (name === "data") return new Inspector(document.querySelector("#observablehq-data-93feb2da"));
+    return ["chartArc"].includes(name);
+  });
+</script>
+
+<script>
+
+  function Forcehart() {
+    const links = data.links.map(d => Object.create(d));
+    const nodes = data.nodes.map(d => Object.create(d));
+    const nodeRadius = 17;
+
+    const zoom = d3
+            .zoom()
+            .scaleExtent([1, 8])
+            .on("zoom", _ => g.attr("transform", d3.event.transform));
+
+    const simulation = d3
+            .forceSimulation(nodes)
+            .force(
+                    "link",
+                    d3
+                            .forceLink(links)
+                            .distance(nodeDistance)
+                            .id(d => d.id)
+            )
+            .force("charge", d3.forceManyBody().strength(chargeStr))
+            .force("collide", d3.forceCollide(d => getRadius(d.group)))
+            .force("center", d3.forceCenter(width / 2, height / 2))
+            .force("x", d3.forceX(width / 2).strength(xStr))
+            .force("y", d3.forceY(height * 0.4).strength(yStr));
+
+    const svg = d3.select(DOM.svg(width, height));
+
+    svg.call(zoom);
+
+    const defs = svg.append('defs');
+    defs
+    .selectAll('clipPath')
+            .data(groupData)
+            .join('clipPath')
+            .attr('id', d => d.name + '-clip')
+            .append('circle')
+            .attr('r', d => nodeRadius * d.mx);
+
+    // group that gets the transfrom
+    const g = svg.append("g");
+
+    const linkG = g
+            .append('g')
+            .selectAll('g')
+            .data(links)
+            .join('g');
+
+    const line = linkG
+            .append('path')
+            .attr('id', d => d.index)
+            .attr('stroke-opacity', 0.6)
+            .attr('stroke', '#333')
+            .attr('stroke-width', '1.5');
+
+    const lineText = linkG
+            .append('text')
+            .append('textPath')
+            .attr('href', d => `#${d.index}`)
+            .attr('startOffset', '50%')
+            .append('tspan')
+            .attr('class', 'link-arrow')
+            .attr(
+                    "style",
+                    "text-anchor: middle; font: 24px sans-serif; user-select: none"
+            )
+            .attr('fill', '#333')
+            .text(d =>
+                    (d.source.id == "Yujing Zhang") | (d.source.id == "Safari Night 2019")
+                            ? ''
+                            : '→'
+            )
+            .attr('dy', 8.75);
+
+    const node = g
+            .append("g")
+            .selectAll("g")
+            .data(nodes)
+            .join("g")
+            .attr("data-name", d => d.id)
+            .attr("class", d => `img-group ${d.group}`)
+            .attr("fill", "none")
+            .call(drag(simulation));
+
+    function trumpCheck(id) {
+    return id == "Donald J. Trump" ? nodeRadius * 2 : nodeRadius;
+  }
+
+  const cir = node
+          .append('circle')
+          .attr('r', d => getRadius(d.group))
+          .attr('stroke', '#333')
+          .attr('stroke-width', 2)
+          .attr('fill', '#999');
+
+  const img = node
+          .append('image')
+          .attr(
+                  'xlink:href',
+                  "https://storage.needpix.com/rsynced_images/attribution-icon-2888829_1280.png"
+          )
+          .attr('clip-path', d => `url(#${d.group}-clip)`)
+          .attr('width', d => getRadius(d.group) * 2)
+          .attr('height', d => getRadius(d.group) * 2)
+          .attr('x', d => getRadius(d.group) * -1)
+          .attr('y', d => getRadius(d.group) * -1);
+
+  tooltip
+          .attr("class", "tooltip")
+          .style("position", "absolute")
+          .style("visibility", "hidden");
+
+  node.on('touchmove mousemove', d => {
+    tooltip.style("visibility", "visible");
+    tooltip.text(d.tooltip);
+    tooltip
+            .style("top", `${d3.event.pageY - 10}px`)
+            .style("left", `${d3.event.pageX + 10}px`);
+  });
+
+  linkG.on('touchmove mousemove', function(d) {
+    tooltip.style('visibility', 'visible');
+    tooltip.text(`${d.source.id} ${d.relationship} ${d.target.id}`);
+    tooltip
+            .style('top', `${d3.event.pageY - 10}px`)
+            .style('left', `${d3.event.pageX + 10}px`);
+
+    d3.select(this)
+            .select('path')
+            .style('stroke', hlColor)
+            .style('stroke-opacity', 1)
+            .style('stroke-width', '3');
+
+    d3.selectAll(
+            `g[data-name="${d.source.id}"] > circle, g[data-name="${d.target.id}"] > circle`
+    )
+            .style('stroke', hlColor)
+            .style('stroke-width', '6');
+  });
+
+  node.on('touchend mouseleave', () => tooltip.style('visibility', 'hidden'));
+
+  linkG.on('touchend mouseleave', function(d) {
+    tooltip.style('visibility', 'hidden');
+
+    d3
+            .select(this)
+            .select('path')
+            .node().style = '';
+
+    d3.selectAll(
+            `g[data-name="${d.source.id}"] > circle, g[data-name="${d.target.id}"] > circle`
+    )
+            .style('stroke', '#333')
+            .style('stroke-width', '2');
+  });
+
+  let pres = node.filter(d => d.group == "president").datum();
+  let tVict = node.filter(d => d.id == 'Trump Victory').datum();
+  let tOrg = node.filter(d => d.id == 'The Trump Organization').datum();
+
+  simulation.on("tick", function() {
+    pres.fy = height / 12;
+    pres.fx = width / 2;
+
+    tVict.fy = height / 6;
+    tVict.fx = width / 2 + nodeRadius * 6;
+
+    tOrg.fy = height / 6;
+    tOrg.fx = width / 2 - nodeRadius * 6;
+
+    line.attr(
+            "d",
+            d => `M ${d.source.x} ${d.source.y} L ${d.target.x} ${d.target.y}`
+    );
+    node.attr('transform', d => `translate(${d.x},${d.y})`);
+  });
+
+  invalidation.then(() => simulation.stop());
+
+  return svg.node();
+  }
+</script>
+</body>
+
+</html>
