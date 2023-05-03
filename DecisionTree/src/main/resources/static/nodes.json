@@ -1,0 +1,31 @@
+[
+{
+"id": "Lu Kunning",
+"group": "guest",
+"photo": "Unknown",
+"tooltip": "Occupation: Unknown."
+},
+{
+"id": "Zhu Ruining",
+"group": "guest",
+"photo": "Unknown",
+"tooltip": "Occupation: Unknown. "
+},
+{
+"id": "Dr. Charles Lee",
+"group": "guest",
+"photo": "DrCharlesLee_RED",
+"tooltip": "Recruits Chinese clients for Trump tourism. Claims to be both a prince and an ambassador to the United Nations, a claim unsupported by U.N. documentation. Sells trips to promote Chinese President Xi Jinping's business diplomacy initiative."
+},
+{
+"id": "Donald J. Trump",
+"group": "president",
+"photo": "Trump",
+"tooltip": "The 45th president of the United States, elected in November 2016."
+},
+{
+"id": "Tong Jingjing",
+"group": "guest",
+"photo": "jingjing",
+"tooltip": "CEO of Silver Aristocrats, an arm of an online investment bank marketed to wealthy Chinese clients."
+}]

@@ -1,0 +1,44 @@
+[
+  {
+    "source": "Lei Yu",
+    "target": "Mar-a-Lago Friends of Israel",
+    "relationship": "attended",
+    "costWhereApplicable": "$750 - $75,000"
+  },
+  {
+    "source": "Sun Ye",
+    "target": "Mar-a-Lago New Year's Eve",
+    "relationship": "attended",
+    "costWhereApplicable": "$1,000"
+  },
+  {
+    "source": "Huachu Tang",
+    "target": "Mar-a-Lago New Year's Eve",
+    "relationship": "attended",
+    "costWhereApplicable": "$1,000"
+  },
+  {
+    "source": "Yuehong Yang",
+    "target": "Mar-a-Lago New Year's Eve",
+    "relationship": "attended",
+    "costWhereApplicable": "$1,000"
+  },
+  {
+    "source": "Lu Kunning",
+    "target": "Mar-a-Lago RNC Lunch",
+    "relationship": "attended",
+    "costWhereApplicable": "$2,700- $50,000"
+  },
+  {
+    "source": "Lu Biao",
+    "target": "Mar-a-Lago RNC Lunch",
+    "relationship": "attended",
+    "costWhereApplicable": "$2,700- $50,000"
+  },
+  {
+    "source": "Zhu Ruining",
+    "target": "Mar-a-Lago RNC Lunch",
+    "relationship": "attended",
+    "costWhereApplicable": "$2,700- $50,000"
+  }
+  ]
