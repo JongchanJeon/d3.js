@@ -35,4 +35,6 @@ public class UserController {
         return "cindy";
     }
 
+    @GetMapping("/graph")
+    public String graph() {return "graph";}
 }
