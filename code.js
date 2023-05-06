@@ -60,7 +60,8 @@ forceProperties = {
     link: {
         enabled: true,
         distance: 30,
-        iterations: 1
+        iterations: 1,
+        direction: 1
     }
 }
 
@@ -129,7 +130,8 @@ function initializeDisplay() {
         .attr("class", "links")
     .selectAll("line")
     .data(graph.links)
-    .enter().append("line");
+    .enter().append("line")
+    .attr("marker-end", "url(#arrowhead)");
 
   // set the data and properties of node circles
   node = svg.append("g")
@@ -140,11 +142,14 @@ function initializeDisplay() {
         .call(d3.drag()
             .on("start", dragstarted)
             .on("drag", dragged)
-            .on("end", dragended));
+            .on("end", dragended))
+            .on("click", function(d) {
+                window.location.href = `https://www.google.com/search?q=${d.id}`; ////////노드를 클릭 했을 때 특정 URL로 넘어가기/////////
+              });
 
   // node tooltip
   node.append("title")
-      .text(function(d) { return d.id; });
+      .text(function(d) { return `${d.id} : ${d.value}`; });
       
       
   // visualize the graph
@@ -179,6 +184,23 @@ function ticked() {
     
 }
 
+/////////화살표 만들기//////////
+
+
+    svg.append("defs").append("marker")
+        .attr("id", "arrowhead")
+        .attr("viewBox", "0 -5 10 10")
+        .attr("refX", 25)
+        .attr("refY", 0)
+        .attr("orient", "auto")
+        .attr("markerWidth", 10)
+        .attr("markerHeight", 10)
+        .attr("xoverflow", "visible")
+        .append("svg:path")
+        .attr("d", "M 0,-5 L 10 ,0 L 0,5")
+        .attr("fill", "#999")
+        .style("stroke","none");
+
 
 
 //////////// UI EVENTS ////////////
@@ -207,6 +229,9 @@ function dragended(d) {
     d.fy = null;
   }
 }
+
+
+
 
 // update size-related forces
 d3.select(window).on("resize", function(){
