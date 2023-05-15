@@ -214,6 +214,7 @@ function dragstarted(d) {
 function dragged(d) {
   d.fx = d3.event.x;
   d.fy = d3.event.y;
+  
 }
 
 function dragended(d) {
