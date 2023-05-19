@@ -13,6 +13,14 @@ const Chart = () => {
 
     let link, node, simulation;
 
+    //툴팁 설정
+    const tooltip = tip()
+      .attr("class", "d3-tip")
+      .html((d) => `${d.id} : ${d.value}`);
+      
+    // 툴팁 호출 
+      svg.call(tooltip);
+
     const initializeDisplay = () => {
       // set the data and properties of link lines
       link = svg
@@ -43,14 +51,26 @@ const Chart = () => {
           window.location.href = `https://www.google.com/search?q=${d.id}`;
         })
         .style("cursor", "pointer"); // 마우스 커서를 포인터로 변경
-        // 툴팁 생성 및 설정
-        const tooltip = tip()
-        .attr("class", "d3-tip")
-        .html((d) => `${d.id} : ${d.value}`);
+        
+        
       
+
       node.call(tooltip);
+
       node.on("mouseover", tooltip.show);
-      node.on("mouseout", tooltip.hide);
+      node.on("mousemove", tooltip.show);
+      node.on("mouseout", () => { //마우스가 툴팁 밖으로 벗어나면 사라지게 설정
+        if (!d3.event.relatedTarget || !d3.event.relatedTarget.classList.contains("d3-tip")) {
+          tooltip.hide();
+        }
+      });
+      
+      // Update the 'node' and 'link' variables with the selection of nodes and links
+      node = svg.selectAll(".nodes circle");
+      link = svg.selectAll(".links line");
+
+      // Update the 'node' variable with the selection of nodes
+      node = node.merge(node);
 
       // generate the svg objects and force simulation
       simulation = d3.forceSimulation(graphData.nodes)
@@ -147,6 +167,18 @@ const Chart = () => {
       d.fx = null;
       d.fy = null;
     };
+    
+    //< 툴팁 클릭 이벤트 처리
+    const handleTooltipClick = (d) => {
+      window.location.href = `https://search.naver.com/search.naver?query=${encodeURIComponent(d.id)}`;
+    };
+    
+    const tooltips = document.getElementsByClassName("d3-tip");
+
+    for (let i = 0; i < tooltips.length; i++) {
+      tooltips[i].addEventListener("click", handleTooltipClick);
+    }
+    //>
 
     initializeDisplay();
 
@@ -158,15 +190,18 @@ const Chart = () => {
       updateDisplay();
     };
 
+    
+    
     window.addEventListener("resize", handleWindowResize);
 
     return () => {
       window.removeEventListener("resize", handleWindowResize);
-      // 시뮬레이션 정리
+      //< 시뮬레이션 정리
       if (simulation) {
         simulation.stop();
         simulation = null;
       }
+      //>
     };
   }, []);
 
