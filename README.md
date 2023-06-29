@@ -510,3 +510,87 @@ svg변수에 대한 노드를 반환해서 해당 svg 요소가 HTML에 삽입�
     36: Object {id: "Yujing Zhang", group: "guest", photo: "GenderlessIcon", tooltip: "Chinese woman arrested attempting to enter Mar-a-L…onics, including a jump drive containing malware."}
     
 - links
+
+- 0: Object {source: "Lei Yu", target: "Mar-a-Lago Friends of Israel", relationship: "attended", costWhereApplicable: "$750 - $75,000"}
+
+1: Object {source: "Sun Ye", target: "Mar-a-Lago New Year's Eve", relationship: "attended", costWhereApplicable: "$1,000"}
+
+2: Object {source: "Huachu Tang", target: "Mar-a-Lago New Year's Eve", relationship: "attended", costWhereApplicable: "$1,000"}
+
+3: Object {source: "Yuehong Yang", target: "Mar-a-Lago New Year's Eve", relationship: "attended", costWhereApplicable: "$1,000"}
+
+4: Object {source: "Lu Kunning", target: "Mar-a-Lago RNC Lunch", relationship: "attended", costWhereApplicable: "$2,700- $50,000"}
+
+5: Object {source: "Lu Biao", target: "Mar-a-Lago RNC Lunch", relationship: "attended", costWhereApplicable: "$2,700- $50,000"}
+
+6: Object {source: "Zhu Ruining", target: "Mar-a-Lago RNC Lunch", relationship: "attended", costWhereApplicable: "$2,700- $50,000"}
+
+7: Object {source: "Yuan Yue", target: "Mar-a-Lago RNC Lunch", relationship: "attended", costWhereApplicable: "$2,700- $50,000"}
+
+8: Object {source: "Xianqin Qu ", target: "Mar-a-Lago Safari Night 2018", relationship: "attended", costWhereApplicable: "$1,000 - $10,000"}
+
+9: Object {source: "Meng Jinhong", target: "Mar-a-Lago Safari Night 2018", relationship: "attended", costWhereApplicable: "$1,000 - $10,000"}
+
+10: Object {source: "Liting Xiong", target: "Mar-a-Lago Safari Night 2018", relationship: "attended", costWhereApplicable: "$1,000 - $10,000", undefined: "cindy yang's wechat"}
+
+11: Object {source: "Zijing Xu", target: "RNC Cipriani Breakfast", relationship: "attended", costWhereApplicable: "$1,000 - $2,700"}
+
+12: Object {source: "Li Jing", target: "RNC Cipriani Breakfast", relationship: "attended", costWhereApplicable: "$1,000 - $2,700"}
+
+13: Object {source: "Jie Yang", target: "RNC Cipriani Breakfast", relationship: "attended", costWhereApplicable: "$1,000 - $2,700"}
+
+14: Object {source: "Liang Lu", target: "RNC Cipriani Breakfast", relationship: "attended", costWhereApplicable: "$1,000 - $2,700"}
+
+15: Object {source: "Shanjie Li", target: "RNC Cipriani Breakfast", relationship: "attended", costWhereApplicable: "$1,000 - $2,700"}
+
+16: Object {source: "Zubin Gong", target: "RNC Cipriani Breakfast", relationship: "attended", costWhereApplicable: "$1,000 - $2,700"}
+
+17: Object {source: "Lu Zihan", target: "RNC Cipriani Breakfast", relationship: "attended", costWhereApplicable: "$1,000 - $2,700"}
+
+18: Object {source: "Tong Jingjing", target: "RNC Cipriani Breakfast", relationship: "attended", costWhereApplicable: "$1,000 - $2,700"}
+
+19: Object {source: "Feng Yahua", target: "RNC Cipriani Breakfast", relationship: "attended", costWhereApplicable: "$1,000 - $2,700"}
+
+20: Object {source: "Wu Hao", target: "RNC Cipriani Breakfast", relationship: "attended", costWhereApplicable: "$1,000 - $2,700"}
+
+21: Object {source: "Huang Yacun", target: "RNC Cipriani Breakfast", relationship: "attended", costWhereApplicable: "$1,000 - $2,700"}
+
+22: Object {source: "Jiang Rui", target: "RNC Cipriani Breakfast", relationship: "attended", costWhereApplicable: "$1,000 - $2,700"}
+
+23: Object {source: "Ren Meihua", target: "RNC Cipriani Breakfast", relationship: "attended", costWhereApplicable: "$1,000 - $2,700"}
+
+24: Object {source: "Yun Li", target: "RNC Cipriani Breakfast", relationship: "attended", costWhereApplicable: "$1,000 - $2,700"}
+
+25: Object {source: "Lou Li", target: "RNC Cipriani Breakfast", relationship: "attended", costWhereApplicable: "$1,000 - $2,700"}
+
+26: Object {source: "Xianqin Qu ", target: "RNC Cipriani Breakfast", relationship: "attended", costWhereApplicable: "$1,000 - $2,700"}
+
+27: Object {source: "Dr. Charles Lee", target: "Mar-a-Lago Friends of Israel", relationship: "attended", costWhereApplicable: "$750 - $75,000"}
+
+28: Object {source: "Dr. Charles Lee", target: "Mar-a-Lago Safari Night 2018", relationship: "attended", costWhereApplicable: "$1,000 - $10,000"}
+
+29: Object {source: "Dr. Charles Lee", target: "RNC Cipriani Breakfast", relationship: "attended", costWhereApplicable: "$2,700"}
+
+30: Object {source: "Trump Victory", target: "Donald J. Trump", relationship: "finaincially benefits"}
+
+31: Object {source: "The Trump Organization", target: "Donald J. Trump", relationship: "finaincially benefits"}
+
+32: Object {source: "Mar-a-Lago Safari Night 2018", target: "The Trump Organization", relationship: "paid to", costWhereApplicable: "$40,000"}
+
+33: Object {source: "Mar-a-Lago Friends of Israel", target: "The Trump Organization", relationship: "paid percentage to"}
+
+34: Object {source: "Mar-a-Lago New Year's Eve", target: "The Trump Organization", relationship: "paid percentage to"}
+
+35: Object {source: "Mar-a-Lago RNC Lunch", target: "The Trump Organization", relationship: "paid to", costWhereApplicable: "$210,000"}
+
+36: Object {source: "RNC Cipriani Breakfast", target: "Trump Victory", relationship: "raised money for"}
+
+37: Object {source: "Mar-a-Lago RNC Lunch", target: "Trump Victory", relationship: "raised money for"}
+
+38: Object {source: "Liang Lu", target: "RNC Cipriani Breakfast", relationship: "took official Trump photo at", costWhereApplicable: "$50,000"}
+
+39: Object {source: "Zijing Xu", target: "RNC Cipriani Breakfast", relationship: "took official Trump photo at", costWhereApplicable: "$50,000"}
+
+40: Object {source: "Yujing Zhang", target: "Safari Night 2019", relationship: "tried to attend"}
+
+41: Object {source: "Safari Night 2019", target: "The Trump Organization", relationship: "would have paid"}
